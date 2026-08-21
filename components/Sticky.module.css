@@ -1,0 +1,49 @@
+.sticky {
+  position: relative;
+  align-self: center;
+  transform: rotate(-1.5deg);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 90%;
+  max-width: 28rem;
+  border: 1px solid rgba(210, 170, 0, 0.35);
+  border-radius: 2px;
+  background: rgba(255, 221, 64, 0.14);
+  padding: 1.25rem 1.25rem 1.4rem;
+  box-shadow: 0.25rem 0.4rem 0.75rem rgba(0, 0, 0, 0.15);
+}
+
+.sticky::before {
+  content: "";
+  position: absolute;
+  top: -0.7rem;
+  left: 50%;
+  width: 3.5rem;
+  height: 1.2rem;
+  transform: translateX(-50%) rotate(-3deg);
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.label {
+  display: inline-block;
+  width: fit-content;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgb(150, 115, 0);
+}
+
+.content > :global(*) {
+  margin: 0;
+  line-height: 1.8;
+}
+
+.content > :global(* + *) {
+  margin-top: 0.5rem;
+}
+
+.content :global(code) {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.85em;
+}

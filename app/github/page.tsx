@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Sticky from "@/components/Sticky";
 import styles from "./page.module.css";
 
 export default function GithubGuide() {
@@ -94,6 +95,25 @@ export default function GithubGuide() {
           <code>main</code> ブランチの状態になっています。ここから
           <code>develop</code> を経由して、自分の作業ブランチを作ります。
         </p>
+
+        <Sticky label="💬 実際に聞かれた質問">
+          <p>
+            「そもそも <code>git checkout</code> って何？」と聞かれたので補足します。
+            <code>checkout</code> は「別のブランチ（作業スペース）に移動する」ためのコマンドで、
+            このページに出てくるのは次の2パターンだけです。
+          </p>
+          <p>
+            <code>git checkout &lt;ブランチ名&gt;</code>
+            <br />
+            → すでにあるブランチに切り替える（例: <code>git checkout develop</code>）
+          </p>
+          <p>
+            <code>git checkout -b &lt;新しいブランチ名&gt;</code>
+            <br />
+            → 新しいブランチを作って、そのまま切り替える（
+            <code>-b</code> は branch の意味）
+          </p>
+        </Sticky>
 
         <p className={styles.paragraph}>
           <strong>1. developブランチに切り替える</strong>

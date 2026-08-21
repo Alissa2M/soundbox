@@ -1,5 +1,6 @@
 import Link from "next/link";
 import CompleteLessonButton from "@/components/CompleteLessonButton";
+import Sticky from "@/components/Sticky";
 import styles from "./page.module.css";
 
 export default function Day03Lesson() {
@@ -10,16 +11,131 @@ export default function Day03Lesson() {
           ← ロードマップに戻る
         </Link>
 
-        <h1 className={styles.title}>Day03: Next.js特有の概要</h1>
+        <h1 className={styles.title}>
+          Day03: JS・TS・React・JSXの整理＋Next.jsの立ち位置
+        </h1>
 
         <p className={styles.paragraph}>
           Day01・Day02では、<code>page.tsx</code>{" "}
-          の中でJSXやコンポーネントの書き方を学んできました。ここまでの
-          話は、実は<strong>React</strong>そのものの話がほとんどです。
-          今日は少しズームアウトして、「React」と「Next.js」が
-          それぞれ何をしているのか、このアプリの土台になっている
-          仕組みを整理します。
+          の中でJSXやコンポーネントの書き方を学んできました。今日は
+          まず、これまで説明なしに使ってきた「JavaScript」
+          「TypeScript」「React」「JSX」「TSX」という言葉を
+          いったん整理して比べます。そのあと少しズームアウトして、
+          「React」と「Next.js」がそれぞれ何をしているのか、
+          このアプリの土台になっている仕組みまで整理します。
         </p>
+
+        <h2 className={styles.heading}>
+          JavaScript・TypeScript・React・JSX・TSXの整理
+        </h2>
+        <p className={styles.paragraph}>
+          この5つの言葉は、実は2つのグループに分かれています。
+          ここを区別すると、全部がつながって見えてきます。
+        </p>
+        <ul className={styles.list}>
+          <li>
+            <strong>JavaScript</strong>と<strong>TypeScript</strong> →
+            プログラミング<strong>言語</strong>そのもの
+          </li>
+          <li>
+            <strong>React</strong> →
+            その言語（主にJavaScript）で書かれた、画面を組み立てる
+            ための<strong>ライブラリ</strong>（次の見出しで詳しく
+            説明します）
+          </li>
+          <li>
+            <strong>JSX</strong>と<strong>TSX</strong> →
+            Reactのコードを書くための特別な
+            <strong>書き方（構文）</strong>。JSXはJavaScript用、
+            TSXはTypeScript用です
+          </li>
+        </ul>
+        <p className={styles.paragraph}>
+          一言でまとめると、
+          <strong>「TSX ＝ TypeScriptでReactを書くときの書き方」</strong>
+          です。今あなたが書いている<code>page.tsx</code>{" "}
+          は、まさにこの4つ（TypeScript・React・JSX・TSX）が
+          全部重なった場所にいます。
+        </p>
+
+        <h2 className={styles.heading}>
+          JavaScriptとTypeScriptの違い（型があるかどうか）
+        </h2>
+        <p className={styles.paragraph}>
+          Day01で「<code>.tsx</code> は TypeScript ＋ JSX の意味」
+          と説明しましたが、TypeScriptがJavaScriptと何が違うのか、
+          実際のコードで比べてみます。
+        </p>
+        <pre className={styles.codeBlock}>
+          <code>{`// JavaScript（型なし）
+function greet(name) {
+  return "Hello, " + name;
+}
+greet(42); // 数字を渡してもエラーにならない（実行するまで気づかない）`}</code>
+        </pre>
+        <pre className={styles.codeBlock}>
+          <code>{`// TypeScript（型あり）
+function greet(name: string): string {
+  return "Hello, " + name;
+}
+greet(42); // 保存した瞬間に赤い波線でエラーが出る（stringじゃないとダメ）`}</code>
+        </pre>
+        <p className={styles.paragraph}>
+          <code>name: string</code>{" "}
+          の部分が「型」です。「この値は文字列であるべき」という
+          ルールをあらかじめ書いておくことで、間違った種類の値を
+          渡してしまったミスに、実行する前（保存した瞬間）に
+          気づけるようになります。これがTypeScriptがJavaScriptに
+          追加している、いちばん大きな機能です。
+        </p>
+
+        <h2 className={styles.heading}>ReactとJSX・TSXの関係</h2>
+        <p className={styles.paragraph}>
+          同じ考え方を、Reactのコンポーネントに当てはめてみます。
+          JSX（JavaScript）で書いた場合と、TSX（TypeScript）で
+          書いた場合を比べてみましょう。
+        </p>
+        <pre className={styles.codeBlock}>
+          <code>{`// JSX（.jsxファイル・JavaScriptでReactを書く）
+function Hello(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+<Hello name={42} /> // ← 数字を渡してもエラーにならない`}</code>
+        </pre>
+        <pre className={styles.codeBlock}>
+          <code>{`// TSX（.tsxファイル・TypeScriptでReactを書く）
+type Props = { name: string };
+
+function Hello({ name }: Props) {
+  return <h1>Hello, {name}</h1>;
+}
+<Hello name={42} /> // ← 保存した瞬間にエラーが出る（nameはstringのはず）`}</code>
+        </pre>
+        <p className={styles.paragraph}>
+          見た目はほとんど同じですが、TSXの方は<code>Props</code>
+          という型を決めているため、間違った値を渡すとすぐに
+          気づけます。「JSXに型チェックを追加したものがTSX」と
+          考えると分かりやすいです。
+        </p>
+
+        <Sticky label="💬 よくある誤解">
+          <p>
+            <strong>「React.jsという言語がある」</strong> →{" "}
+            Reactは言語ではなく<strong>ライブラリ</strong>です。
+            使う言語はJavaScriptかTypeScript。
+          </p>
+          <p>
+            <strong>「JSXとTSXは全然別の書き方」</strong> →{" "}
+            見た目はほぼ同じです。TSXは「JSXに型チェックが
+            付いただけ」。
+          </p>
+          <p>
+            <strong>「TypeScriptを使えばReactは要らない」</strong>{" "}
+            → 役割が違うので両方必要です。TypeScriptは
+            「言語の安全性」、Reactは「画面の組み立て方」を
+            担当しています。
+          </p>
+        </Sticky>
 
         <h2 className={styles.heading}>ReactとNext.jsの違い</h2>
         <p className={styles.paragraph}>

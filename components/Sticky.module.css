@@ -1,17 +1,16 @@
 .sticky {
   position: relative;
   align-self: center;
-  transform: rotate(-1.5deg);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  width: 90%;
-  max-width: 28rem;
+  width: 100%;
   border: 1px solid rgba(210, 170, 0, 0.35);
   border-radius: 2px;
   background: rgba(255, 221, 64, 0.14);
-  padding: 1.25rem 1.25rem 1.4rem;
+  padding: 0.5rem 1.25rem 1.4rem;
   box-shadow: 0.25rem 0.4rem 0.75rem rgba(0, 0, 0, 0.15);
+  margin: 1rem 0;
 }
 
 .sticky::before {
@@ -21,7 +20,6 @@
   left: 50%;
   width: 3.5rem;
   height: 1.2rem;
-  transform: translateX(-50%) rotate(-3deg);
   background: rgba(255, 255, 255, 0.35);
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
@@ -35,6 +33,7 @@
 }
 
 .content > :global(*) {
+  font-size: 0.8rem;
   margin: 0;
   line-height: 1.8;
 }

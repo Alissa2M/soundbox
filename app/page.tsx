@@ -59,10 +59,13 @@ export default function Home() {
         <section className={styles.todayCard}>
           <h2 className={styles.sectionTitle}>GitHub</h2>
           <p className={styles.todayDesc}>
-            お題に取り組む前に、作業ブランチの作り方を確認しましょう。
+            お題に取り組む前に、GitHubでの作業の流れを確認しましょう。
           </p>
-          <Link href="/github" className={styles.ctaButton}>
-            ブランチの作り方を見る →
+          <Link href="/github/part1" className={styles.ctaButton}>
+            Part1：ブランチの作り方を見る →
+          </Link>
+          <Link href="/github/part2" className={styles.ctaButton}>
+            Part2：変更の記録・pushの仕方を見る →
           </Link>
         </section>
 

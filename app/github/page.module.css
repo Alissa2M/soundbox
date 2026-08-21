@@ -31,87 +31,44 @@
   letter-spacing: -0.01em;
 }
 
-.heading {
-  margin: 1rem 0 0;
-  font-size: 1.125rem;
-  font-weight: 600;
-}
-
 .paragraph {
   margin: 0;
   line-height: 1.8;
 }
 
-.list {
-  margin: 0;
-  padding-left: 1.25rem;
-  line-height: 1.8;
-}
-
-.codeBlock {
-  margin: 0;
-  overflow-x: auto;
-  border-radius: 0.5rem;
-  background: rgba(128, 128, 128, 0.12);
-  padding: 1rem;
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.875rem;
-  line-height: 1.6;
-}
-
-.diagram {
-  margin: 0;
-  overflow-x: auto;
-  border-radius: 0.5rem;
-  background: rgba(128, 128, 128, 0.12);
-  padding: 1rem;
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.8rem;
-  line-height: 1.6;
-  white-space: pre;
-}
-
-.branchTable {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.875rem;
-}
-
-.branchTable th,
-.branchTable td {
-  border: 1px solid rgba(128, 128, 128, 0.25);
-  padding: 0.5rem 0.75rem;
-  text-align: left;
-  vertical-align: top;
-}
-
-.branchTable th {
-  background: rgba(128, 128, 128, 0.12);
-}
-
-.warningBox {
+.card {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  border: 1px solid rgba(220, 100, 60, 0.4);
+  border: 1px solid rgba(128, 128, 128, 0.25);
   border-radius: 0.75rem;
-  padding: 1.25rem;
-  background: rgba(220, 100, 60, 0.08);
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
 }
 
-.warningLabel {
+.card:hover {
+  border-color: var(--foreground);
+}
+
+.cardLabel {
   display: inline-block;
   width: fit-content;
   border-radius: 999px;
-  background: rgb(180, 70, 40);
-  color: white;
+  background: rgba(128, 128, 128, 0.15);
   padding: 0.15rem 0.75rem;
   font-size: 0.75rem;
   font-weight: 600;
 }
 
-.hint {
+.cardTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.cardDesc {
   margin: 0;
   font-size: 0.875rem;
   color: rgba(128, 128, 128, 0.9);
+  line-height: 1.6;
 }

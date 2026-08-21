@@ -1,5 +1,6 @@
 import Link from "next/link";
 import CompleteLessonButton from "@/components/CompleteLessonButton";
+import Sticky from "@/components/Sticky";
 import styles from "./page.module.css";
 
 export default function Day02Lesson() {
@@ -22,7 +23,9 @@ export default function Day02Lesson() {
           方法と、見た目にスタイルを付ける方法まで進みます。
         </p>
 
-        <h2 className={styles.heading}>タグの中に書いた文字は、そのまま表示される</h2>
+        <h2 className={styles.heading}>
+          タグの中に書いた文字は、そのまま表示される
+        </h2>
         <p className={styles.paragraph}>
           JSXでは、タグの<strong>開きタグと閉じタグの間</strong>
           に文字を書くと、その文字がそのまま画面に表示されます。これを
@@ -33,11 +36,10 @@ export default function Day02Lesson() {
         </pre>
         <p className={styles.paragraph}>
           <code>&lt;p&gt;</code> は「段落（paragraph）」を表すタグです。
-          <code>&lt;h1&gt;</code>{" "}
-          が「大きな見出し」だったのに対して、<code>&lt;p&gt;</code>{" "}
+          <code>&lt;h1&gt;</code> が「大きな見出し」だったのに対して、
+          <code>&lt;p&gt;</code>{" "}
           は「ふつうの文章」を表すときに使います。中に書いた文字を
-          そのまま表示する、という点では<code>&lt;h1&gt;</code>と
-          同じです。
+          そのまま表示する、という点では<code>&lt;h1&gt;</code>と 同じです。
         </p>
 
         <h2 className={styles.heading}>
@@ -45,8 +47,8 @@ export default function Day02Lesson() {
           <code>&lt;div&gt;</code>でまとめる）
         </h2>
         <p className={styles.paragraph}>
-          <code>return ( ... )</code>{" "}
-          で返せるJSXは、必ず<strong>1つのタグ</strong>
+          <code>return ( ... )</code> で返せるJSXは、必ず
+          <strong>1つのタグ</strong>
           でなければいけません。たとえば、次のように2つのタグを
           並べて書くと、エラーになります。
         </p>
@@ -86,7 +88,9 @@ export default function Day02Page() {
           タグ）として、いちばんよく使われます。
         </p>
 
-        <h2 className={styles.heading}>特殊な文字を書きたいとき（HTMLエンティティ）</h2>
+        <h2 className={styles.heading}>
+          特殊な文字を書きたいとき（HTMLエンティティ）
+        </h2>
         <p className={styles.paragraph}>
           JSXの中では、<code>&lt;</code> と <code>&gt;</code>{" "}
           という記号は「タグの開始・終了」として特別な意味を持っています。
@@ -127,8 +131,8 @@ export default function Day02Page() {
           <code>&lt;p&gt;</code>{" "}
           の中で文章を途中で改行したいとき、そのまま文字を
           複数行に分けて書いても、画面上では改行されません
-          （半角スペース1つ分に詰められてしまいます）。改行したい
-          場所には、<code>&lt;br /&gt;</code> というタグを入れます。
+          （半角スペース1つ分に詰められてしまいます）。改行したい 場所には、
+          <code>&lt;br /&gt;</code> というタグを入れます。
         </p>
         <pre className={styles.codeBlock}>
           <code>{`<p>
@@ -138,14 +142,13 @@ export default function Day02Page() {
 </p>`}</code>
         </pre>
         <p className={styles.paragraph}>
-          <code>&lt;br /&gt;</code>{" "}
-          は「改行」を表すタグですが、これまで出てきた
+          <code>&lt;br /&gt;</code> は「改行」を表すタグですが、これまで出てきた
           <code>&lt;h1&gt;...&lt;/h1&gt;</code> や
           <code>&lt;p&gt;...&lt;/p&gt;</code>{" "}
           と違って、中に文字を入れる必要がありません。
           このような「開きタグと閉じタグをまとめて1つに書くタグ」を
-          <strong>自己終了タグ</strong>と呼び、
-          最後に必ず<code>{" /"}</code>を付けます（HTMLでは省略できますが、
+          <strong>自己終了タグ</strong>と呼び、 最後に必ず<code>{" /"}</code>
+          を付けます（HTMLでは省略できますが、
           JSXでは省略するとエラーになります）。
         </p>
 
@@ -190,17 +193,115 @@ import styles from "./page.module.css";
           衝突が起きない）。
         </p>
 
+        <p className={styles.paragraph}>
+          ファイル名が<code>.module.css</code>{" "}
+          で終わっているCSSファイルをimportすると、Next.jsは裏側で
+          そのCSSファイルを読み取り、
+          <strong>クラス名を1つずつユニークな名前に変換</strong>
+          したうえで、「元のクラス名 → 変換後のクラス名」という
+          対応表（オブジェクト）を作ります。<code>styles</code>{" "}
+          という変数に入ってくるのは、まさにこの対応表です。
+        </p>
+        <pre className={styles.codeBlock}>
+          <code>{`// styles の中身は、実際にはこんなオブジェクトになっている
+// (ファイル名やハッシュ値は毎回変わります)
+console.log(styles);
+// → { highlight: "page_highlight__aB3xa" }
+
+// つまり styles.highlight は、単なる文字列
+styles.highlight // "page_highlight__aB3xa"`}</code>
+        </pre>
+        <p className={styles.paragraph}>
+          そのため、<code>className={"{styles.highlight}"}</code>{" "}
+          と書いたとき、実際に画面に渡っているのは
+          <code>{`class="page_highlight__aB3xa"`}</code>{" "}
+          のような、見慣れない名前のクラスです。私たちが
+          <code>.highlight</code> と名付けたつもりでも、CSS
+          Modulesがファイルごとに別の名前へ変換してくれるおかげで、 他のページの
+          <code>.highlight</code>{" "}
+          と名前がかぶっても事故が起きない、というわけです。
+        </p>
+        <p className={styles.paragraph}>
+          この特別な変換は、ファイル名が
+          <strong>
+            <code>.module.css</code>
+          </strong>
+          で終わっているときだけ発生します。もし拡張子を単に
+          <code>.css</code>{" "}
+          にしてimportした場合は「グローバルCSS」という別の扱いになり、
+          クラス名はそのまま（変換されずに）使われます。その場合、
+          同じ名前のクラスをアプリ内のどこかで再利用すると、
+          お互いのスタイルが上書きしあってしまう可能性があります。
+          「見た目のスタイルは基本的に<code>.module.css</code>{" "}
+          で書く」というのが、このアプリでの決まりです。
+        </p>
+
+        <Sticky label="📝 CSS Modules と 普通のCSS の違い">
+          <p>
+            このアプリには、実は<code>app/globals.css</code>
+            という「普通のCSS（グローバルCSS）」ファイルも存在します。
+            <code>app/layout.tsx</code>の中で
+            <code>{`import "./globals.css";`}</code>{" "}
+            という書き方でimportされていて、色の変数など、アプリ
+            全体で共通のスタイルはここに書かれています。
+          </p>
+          <p>
+            ここで比べてみると、2つの違いがはっきりします。
+          </p>
+          <p>
+            <strong>①importの書き方が違う</strong>
+            <br />
+            普通のCSS：
+            <code>{`import "./globals.css";`}</code>{" "}
+            （何も受け取らない。ファイルを読み込むだけ）
+            <br />
+            CSS Modules：
+            <code>{`import styles from "./page.module.css";`}</code>{" "}
+            （<code>styles</code>という対応表を受け取る）
+          </p>
+          <p>
+            <strong>②クラス名の適用範囲が違う</strong>
+            <br />
+            普通のCSS：クラス名はそのまま使われる＝
+            <strong>アプリ全体に効く</strong>
+            （<code>{`className="highlight"`}</code>のように文字列で指定）
+            <br />
+            CSS Modules：クラス名はファイルごとにユニーク化される＝
+            <strong>そのファイルの中だけに効く</strong>
+            （<code>className={"{styles.highlight}"}</code>{" "}
+            のように対応表経由で指定）
+          </p>
+          <p>
+            だから、「アプリ全体で共通の色やフォント」は
+            <code>globals.css</code>に、「このページ・この
+            コンポーネントだけの見た目」は<code>◯◯.module.css</code>
+            に書く、というのが基本の使い分けです。
+          </p>
+        </Sticky>
+
+        <p className={styles.paragraph}>
+          最後に、応用として1つ紹介します。1つのタグに複数のクラスを
+          同時に適用したいときは、テンプレートリテラル（
+          <code>{"`"}</code>で文字列を囲む書き方）を使って、
+          <code>styles.○○</code> を並べます。
+        </p>
+        <pre className={styles.codeBlock}>
+          <code>{`// highlight と large の両方のスタイルを同時に適用する
+<p className={\`\${styles.highlight} \${styles.large}\`}>
+  青くて大きな文字
+</p>`}</code>
+        </pre>
+
         <div className={styles.taskBox}>
           <span className={styles.taskLabel}>本日のお題</span>
           <p className={styles.paragraph}>
-            見出しと複数行の自己紹介を1つの<code>&lt;div&gt;</code>
-            にまとめ、名前の部分だけCSS Modulesで色を付けたページを、
+            1. 名前の部分だけCSS Modulesで色を付けたページを、
             <code>app/practice/day-02/page.tsx</code>（と
             <code>page.module.css</code>）として作り、
             <code>http://localhost:3000/practice/day-02</code>{" "}
-            で開けるようにしてみましょう。文中のどこかに、エンティティを
-            使って <code>&lt;</code> か <code>&gt;</code> も1つ入れてみてください。
+            で開けるようにしてみましょう。
           </p>
+          <p className={styles.paragraph}>2. 確認クイズを完了させましょう</p>
         </div>
 
         <h2 className={styles.heading}>確認方法</h2>
@@ -211,10 +312,6 @@ import styles from "./page.module.css";
           <li>
             ブラウザで <code>http://localhost:3000/practice/day-02</code> を開く
           </li>
-          <li>
-            見出しと複数行の自己紹介が1つの<code>&lt;div&gt;</code>
-            の中に表示され、名前の部分だけ色が変わっていればクリア🎉
-          </li>
         </ol>
 
         <h2 className={styles.heading}>詰まったら</h2>
@@ -224,29 +321,19 @@ import styles from "./page.module.css";
             を書き忘れていないか確認する（JSXでは必須です）
           </li>
           <li>
-            <code>&lt;</code> や <code>&gt;</code>{" "}
-            をそのまま文章の中に書いていないか確認する（エンティティを
-            使う）
-          </li>
-          <li>
-            <code>&lt;p&gt;</code> と <code>&lt;/p&gt;</code>{" "}
-            がそれぞれ1つずつあるか確認する
-          </li>
-          <li>
-            <code>page.tsx</code> と同じフォルダに{" "}
-            <code>page.module.css</code> というファイル名で作ったか確認する
-            （拡張子・スペルまで正確に）
+            <code>page.tsx</code> と同じフォルダに <code>page.module.css</code>{" "}
+            というファイル名で作ったか確認する （拡張子・スペルまで正確に）
           </li>
           <li>
             <code>{`import styles from "./page.module.css";`}</code>{" "}
             を書き忘れていないか確認する
           </li>
           <li>
-            <code>className={"{styles.name}"}</code>{" "}
-            のように、波かっこ<code>{"{}"}</code>
+            <code>className={"{styles.name}"}</code> のように、波かっこ
+            <code>{"{}"}</code>
             とドット記法で書けているか確認する（クラス名を文字列として
-            <code>{`className="name"`}</code>{" "}
-            のように書いてしまうと、CSS Modulesでは反映されません）
+            <code>{`className="name"`}</code> のように書いてしまうと、CSS
+            Modulesでは反映されません）
           </li>
           <li>
             CSSファイルの中のクラス名と、<code>styles.</code>

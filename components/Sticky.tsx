@@ -3,7 +3,7 @@ import styles from "./Sticky.module.css";
 
 type Props = {
   // 付箋の見出し（例: "💬 実際に聞かれた質問"）
-  label: string;
+  label?: string;
   children: ReactNode;
 };
 

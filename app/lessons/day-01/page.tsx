@@ -185,38 +185,11 @@ React.createElement("h1", null, "Hello World");`}</code>
         <div className={styles.taskBox}>
           <span className={styles.taskLabel}>本日のお題</span>
           <p className={styles.paragraph}>
-            自分の手で、初めてのページを作ってみましょう。
+            「Hello World」をあなたの好きな挨拶に書き換えたページを、
+            <code>app/practice/day-01/page.tsx</code> として作り、
+            <code>http://localhost:3000/practice/day-01</code>{" "}
+            で開けるようにしてみましょう。
           </p>
-          <ol className={styles.list}>
-            <li>
-              <code>app</code> フォルダの中に <code>practice</code> という
-              フォルダを作る（すでにあれば、その中に進む）
-            </li>
-            <li>
-              その中に <code>day-01</code> というフォルダを作る
-            </li>
-            <li>
-              さらにその中に <code>page.tsx</code> というファイルを新しく作る
-            </li>
-            <li>
-              作ったファイルの中に、次のコードを自分で入力する（コピペではなく、
-              できれば手で打ってみましょう）
-            </li>
-          </ol>
-          <pre className={styles.codeBlock}>
-            <code>{`export default function Day01Page() {
-  return (
-    <h1>Hello World</h1>
-  );
-}`}</code>
-          </pre>
-          <p className={styles.paragraph}>
-            書けたら、<code>Hello World</code> の部分を自分の名前を使った
-            挨拶に書き換えてみましょう。例：
-          </p>
-          <pre className={styles.codeBlock}>
-            <code>{`<h1>Hello, Taro!</h1>`}</code>
-          </pre>
         </div>
 
         <h2 className={styles.heading}>確認方法</h2>

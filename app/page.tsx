@@ -7,9 +7,9 @@ import styles from "./page.module.css";
 // 30日分のロードマップ（テーマ一覧）。詳細な説明ページは日々 app/lessons/day-XX/ に追加していきます。
 const ROADMAP = [
   { day: 1, title: "page.tsxって何？画面に表示される仕組みを知る" },
-  { day: 2, title: "JSXの基本：テキストを表示する" },
-  { day: 3, title: "複数のタグを組み合わせる（h1, p, div）" },
-  { day: 4, title: "スタイルを付ける（CSS Modulesで色を変える）" },
+  { day: 2, title: "JSXの基本：テキストを表示する＋スタイルを付ける" },
+  { day: 3, title: "Next.js特有の概要（Reactとの違い・App Router）" },
+  { day: 4, title: "ディレクトリ構成について" },
   { day: 5, title: "画像を表示する" },
   { day: 6, title: "リストを表示する（ul/li）" },
   { day: 7, title: "変数をJSXに埋め込む（{}の使い方）" },

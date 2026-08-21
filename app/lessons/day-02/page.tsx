@@ -10,13 +10,16 @@ export default function Day02Lesson() {
           ← ロードマップに戻る
         </Link>
 
-        <h1 className={styles.title}>Day02: JSXでテキストを表示する</h1>
+        <h1 className={styles.title}>
+          Day02: JSXでテキストを表示する＋スタイルを付ける
+        </h1>
 
         <p className={styles.paragraph}>
           Day01では、<code>{"<h1>Hello World</h1>"}</code>{" "}
           というJSXを書いて、画面に文字を表示しました。今日はその
           「タグの中に文字を書くと、画面にそのまま表示される」という
-          JSXの基本ルールを、もう少し深く見ていきます。
+          JSXの基本ルールをもう少し深く見たあと、複数のタグをまとめる
+          方法と、見た目にスタイルを付ける方法まで進みます。
         </p>
 
         <h2 className={styles.heading}>タグの中に書いた文字は、そのまま表示される</h2>
@@ -37,7 +40,10 @@ export default function Day02Lesson() {
           同じです。
         </p>
 
-        <h2 className={styles.heading}>JSXには「ルート要素は1つだけ」というルールがある</h2>
+        <h2 className={styles.heading}>
+          JSXには「ルート要素は1つだけ」というルールがある（
+          <code>&lt;div&gt;</code>でまとめる）
+        </h2>
         <p className={styles.paragraph}>
           <code>return ( ... )</code>{" "}
           で返せるJSXは、必ず<strong>1つのタグ</strong>
@@ -54,11 +60,30 @@ export default function Day02Page() {
 }`}</code>
         </pre>
         <p className={styles.paragraph}>
-          今日はまだ1つのタグしか使わないので、このルールを意識する
-          場面はありませんが、「JSXは根っこ（ルート）が1つの木の
-          ような形をしている」ということだけ覚えておいてください。
-          複数のタグを組み合わせたいときにどうすればいいかは、
-          Day03で扱います。
+          「JSXは根っこ（ルート）が1つの木のような形をしている」
+          というのがこのルールの正体です。複数のタグを組み合わせたい
+          ときは、それらをまとめて包む<strong>1つのタグ</strong>を
+          外側に用意してあげれば解決します。そのために使われる、最も
+          よく使われるタグが <code>&lt;div&gt;</code> です。
+        </p>
+        <pre className={styles.codeBlock}>
+          <code>{`// ✅ 1つの<div>でまとめれば、複数のタグを一度に返せる
+export default function Day02Page() {
+  return (
+    <div>
+      <h1>こんにちは</h1>
+      <p>今日もコーディングを練習します。</p>
+    </div>
+  );
+}`}</code>
+        </pre>
+        <p className={styles.paragraph}>
+          <code>&lt;div&gt;</code> は「division（区分け）」の意味で、
+          <code>&lt;h1&gt;</code>や<code>&lt;p&gt;</code>と違って、
+          それ自体には見た目上の意味が何もありません。ただの
+          「箱」です。この「意味を持たない箱」という性質のおかげで、
+          複数のタグをひとまとめにしたいときのラッパー（包むための
+          タグ）として、いちばんよく使われます。
         </p>
 
         <h2 className={styles.heading}>特殊な文字を書きたいとき（HTMLエンティティ）</h2>
@@ -124,49 +149,58 @@ export default function Day02Page() {
           JSXでは省略するとエラーになります）。
         </p>
 
+        <h2 className={styles.heading}>
+          見た目にスタイルを付ける（CSS Modules）
+        </h2>
+        <p className={styles.paragraph}>
+          タグには、<code>className</code>{" "}
+          という特別な属性を付けることができます。ここに好きな名前を
+          指定すると、その名前に対応するCSSのルールがタグに適用され、
+          色や太さなどの見た目を変えられます。
+        </p>
+        <p className={styles.paragraph}>
+          このアプリでは、CSSを<strong>CSS Modules</strong>
+          という仕組みで書いています。実は、今あなたが読んでいる
+          このレッスンページ自体も、同じフォルダにある
+          <code>page.module.css</code> というファイルを使って
+          スタイル付けされています。ファイルの先頭にある
+          <code>{`import styles from "./page.module.css";`}</code>{" "}
+          という行が、その読み込みです。
+        </p>
+        <pre className={styles.codeBlock}>
+          <code>{`/* page.module.css に書いたクラス */
+.highlight {
+  color: royalblue;
+  font-weight: 600;
+}`}</code>
+        </pre>
+        <pre className={styles.codeBlock}>
+          <code>{`// page.tsx 側で使うとき
+import styles from "./page.module.css";
+
+<p className={styles.highlight}>ここが青色になります</p>`}</code>
+        </pre>
+        <p className={styles.paragraph}>
+          ポイントは、<code>styles.highlight</code>{" "}
+          のように、CSSに書いたクラス名（<code>.highlight</code>）を
+          JavaScriptの値として読み出して使う、という点です。CSS
+          Modulesはファイルごとにクラス名を自動でユニークな名前に
+          変換してくれるので、別のページで同じ<code>.highlight</code>
+          という名前を使っても、お互いに影響しません（クラス名の
+          衝突が起きない）。
+        </p>
+
         <div className={styles.taskBox}>
           <span className={styles.taskLabel}>本日のお題</span>
           <p className={styles.paragraph}>
-            自分の自己紹介を、複数行の文章として表示してみましょう。
+            見出しと複数行の自己紹介を1つの<code>&lt;div&gt;</code>
+            にまとめ、名前の部分だけCSS Modulesで色を付けたページを、
+            <code>app/practice/day-02/page.tsx</code>（と
+            <code>page.module.css</code>）として作り、
+            <code>http://localhost:3000/practice/day-02</code>{" "}
+            で開けるようにしてみましょう。文中のどこかに、エンティティを
+            使って <code>&lt;</code> か <code>&gt;</code> も1つ入れてみてください。
           </p>
-          <ol className={styles.list}>
-            <li>
-              <code>app/practice</code> フォルダの中に <code>day-02</code>{" "}
-              というフォルダを作る
-            </li>
-            <li>
-              その中に <code>page.tsx</code> というファイルを新しく作る
-            </li>
-            <li>
-              次のコードを参考に、<code>&lt;p&gt;</code>タグ1つの中に、
-              <code>&lt;br /&gt;</code>で改行しながら3行以上の
-              自己紹介を書く（名前・好きなもの・今日の目標など、
-              自由に決めてOK）
-            </li>
-          </ol>
-          <pre className={styles.codeBlock}>
-            <code>{`export default function Day02Page() {
-  return (
-    <p>
-      名前：太郎
-      <br />
-      好きなもの：ラーメン
-      <br />
-      今日の目標：JSXに慣れる
-    </p>
-  );
-}`}</code>
-          </pre>
-          <p className={styles.paragraph}>
-            書けたら、文中のどこかに <code>&lt;</code> や{" "}
-            <code>&gt;</code>{" "}
-            という記号を（エンティティを使って）1つ入れてみましょう。
-            例：
-          </p>
-          <pre className={styles.codeBlock}>
-            <code>{`<br />
-今日の学習時間：30分 &lt; 1時間`}</code>
-          </pre>
         </div>
 
         <h2 className={styles.heading}>確認方法</h2>
@@ -177,7 +211,10 @@ export default function Day02Page() {
           <li>
             ブラウザで <code>http://localhost:3000/practice/day-02</code> を開く
           </li>
-          <li>自己紹介が複数行に分かれて表示されていればクリア🎉</li>
+          <li>
+            見出しと複数行の自己紹介が1つの<code>&lt;div&gt;</code>
+            の中に表示され、名前の部分だけ色が変わっていればクリア🎉
+          </li>
         </ol>
 
         <h2 className={styles.heading}>詰まったら</h2>
@@ -194,6 +231,26 @@ export default function Day02Page() {
           <li>
             <code>&lt;p&gt;</code> と <code>&lt;/p&gt;</code>{" "}
             がそれぞれ1つずつあるか確認する
+          </li>
+          <li>
+            <code>page.tsx</code> と同じフォルダに{" "}
+            <code>page.module.css</code> というファイル名で作ったか確認する
+            （拡張子・スペルまで正確に）
+          </li>
+          <li>
+            <code>{`import styles from "./page.module.css";`}</code>{" "}
+            を書き忘れていないか確認する
+          </li>
+          <li>
+            <code>className={"{styles.name}"}</code>{" "}
+            のように、波かっこ<code>{"{}"}</code>
+            とドット記法で書けているか確認する（クラス名を文字列として
+            <code>{`className="name"`}</code>{" "}
+            のように書いてしまうと、CSS Modulesでは反映されません）
+          </li>
+          <li>
+            CSSファイルの中のクラス名と、<code>styles.</code>
+            の後ろに書いた名前のスペルが一致しているか確認する
           </li>
           <li>保存を忘れていないか確認する（Cmd+S / Ctrl+S）</li>
         </ul>

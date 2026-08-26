@@ -1,9 +1,11 @@
+import styles from "./page.module.css";
 export default function Day02Page() {
   return (
     <>
       <h1>自己紹介</h1>
       <p>
-        こんにちは、<span>若杉</span>です。
+        こんにちは、<span className={styles.highlight}>若杉</span>です。
+        こんにちは、<span >若杉</span>です。
       </p>
 
       <h2>確認クイズ</h2>
@@ -14,22 +16,24 @@ export default function Day02Page() {
       </p>
       <pre>
         <code>{`// 良くない例（全部divで書いてしまっている）
-<div>段落</div>
-<div>大見出し</div>
-<div>中見出し</div>
-<div>太字・強調したい部分</div>
-<div>斜体で表したい部分</div>
-<div>リンクにしたい文字列</div>
-<div>引用文</div>
-<div>コード（等幅フォント）で表したい部分</div>
-<div>ページのヘッダー部分</div>
-<div>ナビゲーションメニュー</div>
-<div>独立した内容のまとまり（記事など）</div>
-<div>ページのフッター部分</div>
-<div>ボタンとして表示したい文字</div>
-<div>意味を持たない箱（ブロック要素をまとめたいだけ）</div>
-<div>意味を持たない範囲（インライン要素をまとめたいだけ）</div>`}</code>
+`}</code>
       </pre>
+
+      <p>段落</p>
+<h1>大見出し</h1>
+<h2>中見出し</h2>
+<p><strong>太字・強調したい部分</strong></p>
+<p><em>斜体で表したい部分</em></p>
+<p><a href="#">リンクにしたい文字列</a></p>
+<blockquote>引用文</blockquote>
+<code>コード（等幅フォント）で表したい部分</code>
+<header>ページのヘッダー部分</header>
+<nav>ナビゲーションメニュー</nav>
+<section>独立した内容のまとまり（記事など）</section>
+<footer>ページのフッター部分</footer>
+<button>ボタンとして表示したい文字</button>
+<div>意味を持たない箱（ブロック要素をまとめたいだけ）</div>
+<span>意味を持たない範囲（インライン要素をまとめたいだけ）</span>
 
       <p>適切なタグに直すとこうなります。</p>
 

@@ -44,6 +44,57 @@
   line-height: 1.6;
 }
 
+.diagramRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 480px) {
+  .diagramRow {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.diagramCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.diagramSvg {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--foreground);
+}
+
+.diagramCaption {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  text-align: center;
+  color: rgba(128, 128, 128, 0.9);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.table th,
+.table td {
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.table th {
+  background: rgba(128, 128, 128, 0.12);
+  font-weight: 600;
+}
+
 .taskBox {
   display: flex;
   flex-direction: column;

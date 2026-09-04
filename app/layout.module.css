@@ -1,0 +1,15 @@
+.page {
+  display: flex;
+  justify-content: center;
+  min-height: 100%;
+  padding: 3rem 1.5rem 4rem;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+}
